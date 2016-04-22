@@ -1,0 +1,38 @@
+module: default
+runtime: python27
+api_version: 1
+threadsafe: true
+
+instance_class: F1
+automatic_scaling:
+  max_idle_instances: automatic  # default value - automatic
+  min_pending_latency: 500ms  # default value - 30ms
+  max_pending_latency: automatic
+
+default_expiration: "30d"
+
+skip_files:
+- ^(.*/)?app\.yaml
+- ^(.*/)?app\.yml
+- ^(.*/)?#.*#
+- ^(.*/)?.*~
+- ^(.*/)?.*\.py[co]
+- ^(.*/)?.*/RCS/.*
+- ^(.*/)?\..*
+- ^(.*/)?tests$
+- ^(.*/)?test$
+- ^test/(.*/)?
+- ^COPYING.LESSER
+- ^README\..*
+- \.gitignore
+- ^\.git/.*
+- \.*\.lint$
+- ^fabfile\.py
+- ^testrunner\.py
+- ^grunt\.js
+- ^node_modules/(.*/)?
+
+
+handlers:
+- url: /.*
+  script: helloworld.app
